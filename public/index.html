@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map Robot Controller</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+        }
+        button {
+            margin: 10px;
+            padding: 15px 30px;
+            font-size: 16px;
+        }
+        .middle-row {
+            display: flex;
+            justify-content: center;
+        }
+        button.stop {
+            border: 2px solid red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button onclick="sendAction('forward')">forward</button>
+        <div class="middle-row">
+            <button onclick="sendAction('left')">left</button>
+            <button class="stop" onclick="sendAction('stop')">stop</button>
+            <button onclick="sendAction('right')">right</button>
+        </div>
+        <button onclick="sendAction('backward')">backward</button>
+    </div>
+
+    <script>
+        function sendAction(action) {
+            fetch('/action', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ action }),
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
