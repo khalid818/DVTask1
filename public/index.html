@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Map Robot Controller</title>
+    <title>Robot Control</title>
     <style>
         body {
             display: flex;
@@ -12,35 +12,67 @@
             height: 100vh;
             margin: 0;
             font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
         }
         .container {
-            text-align: center;
-        }
-        button {
-            margin: 10px;
-            padding: 15px 30px;
-            font-size: 16px;
-        }
-        .middle-row {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
         }
-        button.stop {
-            border: 2px solid red;
+        .row {
+            display: flex;
+            margin: 5px 0;
+        }
+        .mrow {
+            display: flex;
+            margin: 0 5px;
+        }
+        .control-btn {
+            width: 100px;
+            height: 100px;
+            border: none;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+        .control-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <button onclick="sendAction('forward')">forward</button>
-        <div class="middle-row">
-            <button onclick="sendAction('left')">left</button>
-            <button class="stop" onclick="sendAction('stop')">stop</button>
-            <button onclick="sendAction('right')">right</button>
+        <div>
+            <h1>Robot Control Panel</h1>
         </div>
-        <button onclick="sendAction('backward')">backward</button>
+        <div class="row">
+        <button class="control-btn" onclick="sendAction('Forward')">
+            <img src="images/forward.png" alt="Forward">
+        </button>
+        </div>
+        <div class="row">
+            <div class="mrow">
+            <button class="control-btn" onclick="sendAction('Left')">
+                <img src="images/left.png" alt="Left">
+            </button></div>
+            <div class="mrow">
+            <button class="control-btn" onclick="sendAction('Stop')">
+                <img src="images/stop.png" alt="Stop">
+            </button></div>
+            <div class="mrow">
+            <button class="control-btn" onclick="sendAction('Right')">
+                <img src="images/right.png" alt="Right">
+            </button></div>
+        </div>
+        <div class="row">
+        <button class="control-btn" onclick="sendAction('Backward')">
+            <img src="images/backward.png" alt="Backward">
+        </button>
+        </div>
     </div>
-
     <script>
         function sendAction(action) {
             fetch('/action', {
